@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tool Image Editor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css" />
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <div class="card m-2">
+            <div class="card-header">
+                Image Editor
+            </div>
+            <div class="card-body">
+                <!--  -->
+                <form>
+                    <div id="rowInputImage" class="form-row">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputImage" accept="image/png, image/jpeg">
+                            <label class="custom-file-label" for="customFile">Choose Image</label>
+                        </div>
+                    </div>
+                </form>
+                <!--  -->
+                <div id="rowEditImage" class="row">
+                    <div class="col">
+                        <img id="imageEdit" src="" class="w-100" />
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <fieldset class="w-100 mt-3 mb-3">
+                                <legend>Filters</legend>
+                                <!-- 
+                                blur(5px);
+                                filter: brightness(0.4);
+                                filter: contrast(200%);
+                                filter: drop-shadow(16px 16px 20px blue);
+                                filter: grayscale(50%);
+                                filter: hue-rotate(90deg);
+                                filter: invert(75%);
+                                filter: opacity(25%);
+                                filter: saturate(30%);
+                                filter: sepia(60%);
+                                -->
+                                <div class="form-row mr-3">
+                                    <label for="">Brightness</label>
+                                    <input type="range" class="custom-range text-secondary" min="0" max="10" step="0.1" value="1" id="rangeBrightness">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">Contrast</label>
+                                    <input type="range" class="custom-range" min="-300" max="300" value='0' id="rangeContrast">
+                                </div>
+                                <!-- <div class="form-row mr-3">
+                                    <label for="">drop shadows</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="rangeDropShadows">
+                                </div> -->
+                                <div class="form-row mr-3">
+                                    <label for="">Grayscale</label>
+                                    <input type="range" class="custom-range" min="0" max="100" id="rangeGrayscale">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">hue</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">invert</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">opacity</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">saturate</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
+                                </div>
+                                <div class="form-row mr-3">
+                                    <label for="">sepia</label>
+                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                        <div class="row">
+                            <div class="col pl-0">
+                                <button id="btnSave" type="button" class="btn btn-primary mr-3">Save</button>
+                                <button id="btnReset" type="button" class="btn btn-secondary mr-3">Reset</button>
+                            </div>
+                            <div class="col text-right">
+                                <button id="btnCancel" type="button" class="btn btn-warning">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
