@@ -18,10 +18,10 @@
             <div class="card-header">
                 Image Editor
             </div>
-            <div class="card-body">
+            <div class="card-body p-1">
                 <!--  -->
-                <form>
-                    <div id="rowInputImage" class="form-row">
+                <form class="">
+                    <div id="rowInputImage" class="form-row m-5">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputImage" accept="image/png, image/jpeg">
                             <label class="custom-file-label" for="customFile">Choose Image</label>
@@ -29,73 +29,86 @@
                     </div>
                 </form>
                 <!--  -->
-                <div id="rowEditImage" class="row">
-                    <div class="col">
-                        <img id="imageEdit" src="" class="w-100" />
+                <div id="rowEditImage" class="row d-none m-1">
+                    <div class="col text-center">
+                        <img id="imageEdit" src="" class="w-75" />
                     </div>
                     <div class="col-3">
                         <div class="row">
-                            <fieldset class="w-100 mt-3 mb-3">
-                                <legend>Filters</legend>
-                                <!-- 
-                                blur(5px);
-                                filter: brightness(0.4);
-                                filter: contrast(200%);
-                                filter: drop-shadow(16px 16px 20px blue);
-                                filter: grayscale(50%);
-                                filter: hue-rotate(90deg);
-                                filter: invert(75%);
-                                filter: opacity(25%);
-                                filter: saturate(30%);
-                                filter: sepia(60%);
-                                -->
-                                <div class="form-row mr-3">
-                                    <label for="">Grayscale</label>
-                                    <input type="range" class="custom-range" value="0" min="0" max="100" step="1" id="rangeGrayscale">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">sepia</label>
-                                    <input type="range" class="custom-range" value="0" min="0" max="100" step="1" id="rangeSepia">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">Brightness</label>
-                                    <input type="range" class="custom-range" value="0" min="0" max="10" step="0.1" value="1" id="rangeBrightness">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">Contrast</label>
-                                    <input type="range" class="custom-range" min="-300" max="300" value='0' id="rangeContrast">
-                                </div>
-                                <!-- <div class="form-row mr-3">
-                                    <label for="">drop shadows</label>
-                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="rangeDropShadows">
-                                </div> -->
-                                <div class="form-row mr-3">
-                                    <label for="">hue</label>
-                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">invert</label>
-                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">opacity</label>
-                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
-                                </div>
-                                <div class="form-row mr-3">
-                                    <label for="">saturate</label>
-                                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="">
-                                </div>
+                            <div class="col">
+                                <form id="formTools">
+                                    <fieldset class="">
 
-                            </fieldset>
-                        </div>
 
-                        <div class="row">
-                            <div class="col pl-0">
-                                <button id="btnSave" type="button" class="btn btn-primary mr-3">Save</button>
-                                <button id="btnReset" type="button" class="btn btn-secondary mr-3">Reset</button>
-                            </div>
-                            <div class="col text-right">
-                                <button id="btnCancel" type="button" class="btn btn-warning">Cancel</button>
+                                        <legend>Filters</legend>
+                                        <!-- 
+                                        blur(5px);
+                                        filter: brightness(0.4);
+                                        filter: contrast(200%);
+                                        filter: drop-shadow(16px 16px 20px blue);
+                                        filter: grayscale(50%);
+                                        filter: hue-rotate(90deg);
+                                        filter: invert(75%);
+                                        filter: opacity(25%);
+                                        filter: saturate(30%);
+                                        filter: sepia(60%);
+                                    -->
+                                        <div class="form-row mr-3">
+                                            <label class="w-100" for="rangeBrightness">Brightness</label>
+                                            <input class="custom-range text-secondary w-75 align-middle" type="range" min="0" max="1000" step="10" value="0" id="rangeBrightness">
+                                            <span></span>
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeContrast">Contrast</label>
+                                            <input type="range" class="custom-range" min="0" max="300" step="10" value="0" id="rangeContrast">
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeGrayscale">Grayscale</label>
+                                            <input type="range" class="custom-range" min="0" max="100" step="1" value="0" id="rangeGrayscale">
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeInvert">Invert</label>
+                                            <input type="range" class="custom-range" min="0" max="100" step="1" value="0" id="rangeInvert">
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeSaturate">Saturate</label>
+                                            <input type="range" class="custom-range" min="0" max="100" step="1" value="0" id="rangeSaturate">
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeSepia">Sepia</label>
+                                            <input type="range" class="custom-range" min="0" max="100" step="1" value="0" id="rangeSepia">
+                                        </div>
+                                        <div class="form-row mr-3">
+                                            <label for="rangeOpacity">Opacity</label>
+                                            <input type="range" class="custom-range" min="0" max="100" step="1" value="100" id="rangeOpacity">
+                                        </div>
+                                        <!--  -->
+                                        <div class="form-row mr-3">
+                                            <label for="rangeHUE">Hue</label>
+                                            <input type="range" class="custom-range" min="0" max="360" step="1" value="0" id="rangeHUE">
+                                        </div>
+                                        <!--  -->
+                                        <div class="form-row mr-3">
+                                            <label class='w-100' for="rangeDropShadowsHorizontal">Drop shadows</label>
+                                            <input type="number" class="w-25 form-control" value="0" id="rangeDropShadowsHorizontal">
+                                            <input type="number" class="w-25 form-control" value="0" id="rangeDropShadowsVertical">
+                                            <input type="number" class="w-25 form-control" value="0" id="rangeDropShadowsBlur">
+                                            <input type="color" class="w-25 form-control" value="0" id="rangeDropShadowsColor">
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                                <div class="mt-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button id="btnSave" type="button" class="btn btn-primary mr-3">Save</button>
+                                            <button id="btnReset" type="button" class="btn btn-secondary mr-3">Reset</button>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button id="btnCancel" type="button" class="btn btn-warning">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

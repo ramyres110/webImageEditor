@@ -15,6 +15,17 @@ class ImageEditor {
         this.rangeSepia = document.querySelector('#rangeSepia');
         this.rangeBrightness = document.querySelector('#rangeBrightness');
         this.rangeContrast = document.querySelector('#rangeContrast');
+        this.rangeGrayscale = document.querySelector('#rangeGrayscale');
+        this.rangeHUE = document.querySelector('#rangeHUE');
+        this.rangeInvert = document.querySelector('#rangeInvert');
+        this.rangeSaturate = document.querySelector('#rangeSaturate');
+        this.rangeSepia = document.querySelector('#rangeSepia');
+        this.rangeOpacity = document.querySelector('#rangeOpacity');
+        //--
+        this.rangeDropShadowsHorizontal = document.querySelector('#rangeDropShadows');
+        this.rangeDropShadowsVertical = document.querySelector('#rangeDropShadows');
+        this.rangeDropShadowsBlur = document.querySelector('#rangeDropShadows');
+        this.rangeDropShadowsColor = document.querySelector('#rangeDropShadows');
 
         this.changeView();
         this.loadEvents();
@@ -27,7 +38,7 @@ class ImageEditor {
             this.changeView('edit');
         });
         this.btnSave.addEventListener('click', (event) => {
-            this.preventDefault();
+            event.preventDefault();
             this.saveImage();
         })
         this.btnReset.addEventListener('click', (event) => {
@@ -39,22 +50,56 @@ class ImageEditor {
             this.cancelEdition();
         })
         //-
-        this.rangeGrayscale.addEventListener('change', (event) => {
-            event.preventDefault();
-            this.applyFilter('grayscale', event.target.value + '%');
-        })
-        this.rangeSepia.addEventListener('change', (event) => {
-            event.preventDefault();
-            this.applyFilter('sepia', event.target.value + '%');
-        })
         this.rangeBrightness.addEventListener('change', (event) => {
             event.preventDefault();
-            this.applyFilter('brightness', event.target.value + '');
+            this.applyFilter('brightness', event.target.value);
         })
         this.rangeContrast.addEventListener('change', (event) => {
             event.preventDefault();
-            this.applyFilter('contrast', event.target.value + '%');
+            this.applyFilter('contrast', event.target.value);
         })
+        this.rangeGrayscale.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('grayscale', event.target.value);
+        })
+        this.rangeHUE.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('hue-rotate', event.target.value);
+        })
+        this.rangeInvert.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('invert', event.target.value);
+        })
+        this.rangeSaturate.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('saturate', event.target.value);
+        })
+        this.rangeSepia.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('sepia', event.target.value);
+        })
+        this.rangeOpacity.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('opacity', event.target.value);
+        })
+        //-
+        this.rangeDropShadowsHorizontal.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilterDropShadow('h', event.target.value);
+        })
+        this.rangeDropShadowsVertical.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilterDropShadow('v', event.target.value);
+        })
+        this.rangeDropShadowsBlur.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilterDropShadow('b', event.target.value);
+        })
+        this.rangeDropShadowsColor.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilterDropShadow('c', event.target.value);
+        })
+
     }
 
     changeView(view = 'input') {
@@ -74,12 +119,7 @@ class ImageEditor {
     }
 
     initFilters() {
-        this.filters = {
-            grayscale: '0%',
-            sepia: '0%',
-            brightness: '1.0',
-            contrast: '100%',
-        };
+        this.filters = {};
         this.updateFilters()
     }
 
@@ -88,17 +128,55 @@ class ImageEditor {
         this.updateFilters()
     }
 
-    updateFilters() {
-        let filterString = 'filter: ';
-        for (const key of Object.keys(this.filters)) {
-            filterString = filterString + `${key}(${this.filters[key]}) `;
-        }
-        this.imageEdit.setAttribute('style', filterString);
+    applyFilterDropShadow(){
+
     }
 
-    saveImage() { }
+    updateFilters() {
+        let metric = '%';
+        let filterString = '';
+        this.imageEdit.removeAttribute('style');
 
-    resetEditor() { }
+        for (const key of Object.keys(this.filters)) {
+            if (key === "drop-shadow") return;
+            if (key === 'hue-rotate') metric = "deg";
+            filterString = filterString + `${key}(${this.filters[key] + metric}) `;
+            metric = "%";
+        }
+
+        if (filterString !== '') {
+            this.imageEdit.setAttribute('style', 'filter: ' + filterString + ';');
+        }
+    }
+
+    saveImage() {
+        let canvas = document.createElement('canvas');
+        canvas.id = "canvasPhoto";
+        canvas.width = this.imageEdit.width;
+        canvas.height = this.imageEdit.height;
+        canvas.classList.add('d-none');
+        document.body.appendChild(canvas);
+
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(this.imageEdit, 0, 0, canvas.width, canvas.height);
+
+        this.download(canvas);
+    }
+
+
+    download(canvas) {
+        let strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no";
+        let data = canvas.toDataURL("image/png");
+        if (!window.open(data, "", strWindowFeatures)) {
+            document.location.href = data;
+        }
+    }
+
+    resetEditor() {
+        document.querySelector('#formTools').reset();
+        this.filters = {};
+        this.updateFilters();
+    }
 
     cancelEdition() {
         let resp = true;
