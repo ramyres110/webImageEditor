@@ -11,9 +11,10 @@ class ImageEditor {
         this.btnReset = document.querySelector('#btnReset');
         this.btnCancel = document.querySelector('#btnCancel');
         //--
+        this.rangeGrayscale = document.querySelector('#rangeGrayscale');
+        this.rangeSepia = document.querySelector('#rangeSepia');
         this.rangeBrightness = document.querySelector('#rangeBrightness');
         this.rangeContrast = document.querySelector('#rangeContrast');
-        this.rangeGrayscale = document.querySelector('#rangeGrayscale');
 
         this.changeView();
         this.loadEvents();
@@ -37,6 +38,15 @@ class ImageEditor {
             event.preventDefault();
             this.cancelEdition();
         })
+        //-
+        this.rangeGrayscale.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('grayscale', event.target.value + '%');
+        })
+        this.rangeSepia.addEventListener('change', (event) => {
+            event.preventDefault();
+            this.applyFilter('sepia', event.target.value + '%');
+        })
         this.rangeBrightness.addEventListener('change', (event) => {
             event.preventDefault();
             this.applyFilter('brightness', event.target.value + '');
@@ -44,10 +54,6 @@ class ImageEditor {
         this.rangeContrast.addEventListener('change', (event) => {
             event.preventDefault();
             this.applyFilter('contrast', event.target.value + '%');
-        })
-        this.rangeGrayscale.addEventListener('change', (event) => {
-            event.preventDefault();
-            this.applyFilter('grayscale', event.target.value + '%');
         })
     }
 
@@ -69,9 +75,10 @@ class ImageEditor {
 
     initFilters() {
         this.filters = {
+            grayscale: '0%',
+            sepia: '0%',
             brightness: '1.0',
-            contrast: '200%',
-            grayscale: '50%'
+            contrast: '100%',
         };
         this.updateFilters()
     }

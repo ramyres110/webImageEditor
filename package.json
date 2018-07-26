@@ -1,11 +1,15 @@
 {
-  "name": "tool-image-editor",
+  "name": "web-image-editor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server . -p 1234",
+    "test": ""
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Ramyres110 <ramyres90@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
 }
